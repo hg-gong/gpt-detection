@@ -2,6 +2,7 @@
 import numpy as np
 import torch
 from transformers import RobertaForSequenceClassification, RobertaTokenizer
+import sys
 
 
 def load_model(model_path):
@@ -36,9 +37,9 @@ def get_prediction(model, input_ids, attention_mask):
     return predicted_label
 
 
-def main():
+def main(path):
     # Load the fine-tuned model from the saved state dict
-    model_path = "best_model.pt"
+    model_path = path # e.g. "best_model.pt"
     tokenizer, model = load_model(model_path)
 
     # Get the test sentence from the file
@@ -60,4 +61,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    model_path = str(sys.argv[1])
+    main(model_path)
